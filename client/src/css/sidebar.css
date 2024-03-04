@@ -1,0 +1,37 @@
+
+.sidebar-main{
+    position: fixed;
+    background-color: white;
+    width: 100px;
+    height: 100vh;
+    z-index: 1;
+    display: flex;
+    justify-content: flex-start ;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom:20px;
+    margin-top: 60px;
+    gap:40px;
+    
+}
+
+.sidebar-main-profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.sidebar-main-profile:hover{
+    background-color: rgb(222, 222, 222);
+}
+
+.sidebar-main-profile img{
+    width: 60%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 100%;
+}

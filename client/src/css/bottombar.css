@@ -1,0 +1,35 @@
+.bottombar-outer-container{
+    background-color: white;
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        bottom: 0;
+        z-index: 2;
+        height: 40px;
+        padding-inline: 20px;
+        gap:50px;
+        padding: 10px;
+        border-radius: 100px;
+        margin-block: 10px;
+        border: 0.5px solid black;
+        opacity: 0.9;
+        
+}
+
+.bottombar-main-profile{
+    opacity: 1;
+    background-color: white;
+    padding: 5px;
+}
+
+.bottombar-main-profile img{
+    width:40px;
+    height: 40px;
+    
+}
+
+.bottombar-main-profile:hover{
+    background-color: rgb(222, 222, 222);
+}
