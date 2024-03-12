@@ -100,14 +100,15 @@ function Profile({ viewportWidth }) {
                 </div>
               </Carousel>
             </div>
-            <div className="profile-data">
-              <div className="profile-data-container">
-                <div className="profile-data-post"></div>
-                <div className="profile-data-post"></div>
-                <div className="profile-data-post"></div>
-                <div className="profile-data-post"></div>
-                <div className="profile-data-post"></div>
-              </div>
+          </div>
+          <div className="profile-data">
+            <div className="profile-data-container">
+              <div className="profile-data-post"></div>
+              <div className="profile-data-post"></div>
+              <div className="profile-data-post"></div>
+              <div className="profile-data-post"></div>
+              <div className="profile-data-post"></div>
+              <div className="profile-data-post"></div>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 .profile-main{
-    width: 100vw;
+   
  
     
 }
@@ -8,14 +8,14 @@
     position: absolute;
     z-index: -1;
     background-color: rgb(236, 236, 236);
-    width: 100vw;
+    width: 100%;
     height: 250px;
   
     
 }
 
 .profile-upper{
-    width: 100vw;
+   
     height: 400px;
     display: flex;
     margin-top: 50px;
@@ -82,13 +82,13 @@
 }
 
 .profile-bottom{
-   width: 100%;
+  
    background-color: rgb(236, 236, 236);
 }
 
 .profile-bottom-container{
   
-    width: 100%;
+   
     display: flex;
     justify-content: center;
     align-items: center;
@@ -104,25 +104,26 @@
 }
 
 .profile-data{
-    width: 90%;
+  width: 100%;
+  /* height: 600px; */
+  margin-top: 30px;
 }
 
 .profile-data-container{
-    width: 90% ;
-    display: flex;
-    padding: 20px;
-    flex-wrap: wrap;
-
+    width: 100%;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    /* grid-template-rows: 100px 100px 100px 100px ; */
+    
 }
 
 .profile-data-post{
-    width: 25%;
-    height: 30vh;
-    background-size: cover;
+    height: 400px;
     background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
     background-image: url("../Assets/demo.jpg");
-    border: 1px solid black;
+    border: 2px solid black;
 }
 
 
@@ -145,6 +146,15 @@
     
     
     
+        }
+
+        .profile-data-container{
+            grid-template-columns: 50% 50%;
+
+        }
+        .profile-data-post {
+            height: 300px;
+           
         }
 
 }
