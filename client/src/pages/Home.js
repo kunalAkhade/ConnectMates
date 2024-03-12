@@ -8,7 +8,6 @@ import clip from "../Assets/clip.png";
 import attachment from "../Assets/attachment.png";
 import heart from "../Assets/heart.png";
 import comment from "../Assets/comment.png";
-import jaan from "../Assets/jaan.jpg";
 import data from "@emoji-mart/data";
 import { init } from "emoji-mart";
 import Carousel from "react-elastic-carousel";

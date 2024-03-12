@@ -41,7 +41,10 @@ function App() {
                 path="/"
                 element={<Home viewportWidth={viewportWidth} />}
               />
-              <Route path="/profile" element={<Profile />} />
+              <Route
+                path="/profile"
+                element={<Profile viewportWidth={viewportWidth} />}
+              />
               <Route path="/findFriends" element={<FindFriends />} />
               <Route path="/sidebar" element={<Sidebar2 />} />
               {/* A catch-all route for 404 Not Found */}

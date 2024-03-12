@@ -29,14 +29,14 @@ export default function Navbar() {
     navigate(`/${page}`);
   };
 
-  const handleClickAlt = (page) => {
-    if (go === true) {
-      navigate(`/${page}`);
-    } else {
-      navigate("/");
-    }
-    setgo((prev) => !prev);
-  };
+  // const handleClickAlt = (page) => {
+  //   if (go === true) {
+  //     navigate(`/${page}`);
+  //   } else {
+  //     navigate("/");
+  //   }
+  //   setgo((prev) => !prev);
+  // };
 
   const [open, setClose] = useState(true);
   function isSidebar() {
@@ -95,7 +95,7 @@ export default function Navbar() {
                 </div>
               </>
             ) : (
-              <div onClick={() => handleClickAlt("sidebar")}>
+              <div onClick={() => handleClick("sidebar")}>
                 <img width={20} height={20} src={menu} alt="" />
               </div>
             )}
