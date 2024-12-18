@@ -4,39 +4,21 @@ import { useNavigate } from "react-router-dom";
 import Open from "../Assets/open.png";
 import close from "../Assets/close.png";
 import menu from "../Assets/menu.png";
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export default function Navbar() {
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
-  const [go, setgo] = useState(true);
+export default function Navbar({ viewportWidth }) {
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const url = useLocation();
 
-  useEffect(() => {
-    // Update viewport width when the window is resized
-    const handleResize = () => {
-      setViewportWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    // Clean up the event listener when the component unmounts
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
+  const [open2, setClose2] = useState(
+    url.pathname === "/sidebar" ? true : false
+  );
+  console.log(url.pathname, open2);
   const navigate = useNavigate();
   const handleClick = (page) => {
-    console.log(go, "kunal");
     navigate(`/${page}`);
   };
-
-  // const handleClickAlt = (page) => {
-  //   if (go === true) {
-  //     navigate(`/${page}`);
-  //   } else {
-  //     navigate("/");
-  //   }
-  //   setgo((prev) => !prev);
-  // };
 
   const [open, setClose] = useState(true);
   function isSidebar() {
@@ -53,7 +35,7 @@ export default function Navbar() {
     <>
       <div className="navbar-outer-container">
         <div onClick={isSidebar}>
-          {viewportWidth > 700 ? (
+          {viewportWidth > 700 && isAuthenticated ? (
             <>
               {open ? (
                 <img
@@ -64,7 +46,7 @@ export default function Navbar() {
                   alt=""
                 />
               ) : (
-                <img width={20} height={20} src={Open} alt="" />
+                <img width={30} height={30} src={close} alt="" />
               )}
             </>
           ) : (
@@ -84,18 +66,43 @@ export default function Navbar() {
           <div className="navbar-section-second">
             {viewportWidth > 700 ? (
               <>
-                <div onClick={() => handleClick("")}>
+                <div
+                  onClick={() => {
+                    handleClick("");
+                    setClose2(false);
+                  }}
+                >
                   <b>Home</b>
                 </div>
-                <div onClick={() => handleClick("profile")}>
+                <div
+                  onClick={() => {
+                    handleClick("profile");
+                    setClose2(false);
+                  }}
+                >
                   <b>Profile</b>
                 </div>
-                <div onClick={() => handleClick("findFriends")}>
+                <div
+                  onClick={() => {
+                    handleClick("findFriends");
+                    setClose2(false);
+                  }}
+                >
                   <b>Find Friends</b>
                 </div>
               </>
             ) : (
-              <div onClick={() => handleClick("sidebar")}>
+              <div
+                onClick={() => {
+                  if (open2) {
+                    window.history.back();
+                    setClose2(false);
+                  } else {
+                    handleClick("sidebar");
+                    setClose2(true);
+                  }
+                }}
+              >
                 <img width={20} height={20} src={menu} alt="" />
               </div>
             )}

@@ -180,6 +180,7 @@
    width: 100%;
    border-radius: 5px;
    object-fit: contain;
+   height: 60vh;
 }
 
 .post-bottom{
@@ -228,6 +229,64 @@
 .emoji-mart-emoji {
     font-size: 40px;
     /* Adjust the size as needed */
+}
+
+.my-modal-container{
+    width: 100vw;
+    height: 100vh;
+    position:  fixed;
+    background-color: black;
+    opacity: 0.6;
+    
+
+}
+
+.my-modal{
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    position: fixed;
+    width: 400px;
+    background-color: white;
+    height: fit-content;
+    padding: 10px;
+    border-radius: 20px;
+    
+    
+}
+
+.my-modal-inner{
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   
+}
+
+.Dropdown-control{
+    border: 1px solid gray!important;
+}
+
+.my-modal-inner input{
+    height: 50px;
+    border: 1px solid gray;
+    padding: 10px 7px;
+    font-size: 20px;
+    border-radius: 10px;
+
+
+}
+
+.my-modal-inner textarea{
+    padding: 6px 5px;
+    font-size: 20px;
+   
+}
+
+.my-modal-inner button{
+    width: 50%;
+    height: 30px;
+    font-size: 15px;
+    
 }
 
 @media  (max-width : 720px) {

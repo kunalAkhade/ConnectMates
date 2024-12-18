@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/navbar";
 import "../css/home.css";
 import demo from "../Assets/demo.jpg";
@@ -11,9 +11,28 @@ import comment from "../Assets/comment.png";
 import data from "@emoji-mart/data";
 import { init } from "emoji-mart";
 import Carousel from "react-elastic-carousel";
+import { useState } from "react";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
+import { useDispatch } from "react-redux";
+import {
+  loginSuccess,
+  logout,
+  loginFailure,
+} from "../app/features/auth/authSlice";
+import axios from "axios";
 
 init({ data });
 function Home({ viewportWidth }) {
+  useEffect(() => {
+    const handleFetch = async () => {
+      const response = await axios.get("");
+      if (response.data.message) {
+      }
+    };
+    handleFetch();
+  }, []);
+
   const responsive = {
     desktop1: {
       breakpoint: { max: 3000, min: 1300 },
@@ -51,6 +70,24 @@ function Home({ viewportWidth }) {
     "writing_hand",
     "performing_arts",
   ];
+  const [category, setCategory] = useState("");
+  const [file, setFile] = useState(null);
+  const selectCategory = (e) => {
+    setCategory(e.value);
+  };
+  const handleSubmit = (e) => {
+    console.log(file);
+    console.log(category);
+  };
+
+  const selectFile = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <>
       <div className="home-main">
@@ -62,7 +99,7 @@ function Home({ viewportWidth }) {
                   <img src={demo} alt="" />
                 </div>
                 <div className="post-text">
-                  <button>
+                  <button onClick={handleShow}>
                     <b>Start a Post</b>
                   </button>
                 </div>
@@ -170,6 +207,29 @@ function Home({ viewportWidth }) {
           </div>
         </div>
       </div>
+      {show ? (
+        <>
+          <div className="my-modal-container"></div>
+          <div className="my-modal">
+            <div className="my-modal-inner">
+              <input type="file" onChange={selectFile} />
+              <Dropdown
+                options={["cricket", "dance", "video games"]}
+                onChange={selectCategory}
+                value={category}
+                placeholder="Select a category"
+              />
+              <textarea rows={4} column={4}></textarea>
+              <div style={{ display: "flex", gap: "10px" }}>
+                <button onClick={handleSubmit}>Post</button>
+                <button onClick={handleClose}>Close</button>
+              </div>
+            </div>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 }

@@ -4,12 +4,120 @@
     
 }
 
+
+
+.profile-modal{
+    position: fixed;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.5;
+    
+}
+
+.profile-modal-container{
+    width: 800px;
+    height: fit-content;
+    background-color: rgb(255, 255, 255);
+    position: relative;
+    overflow: auto;
+    max-height: 90vh;
+    
+   
+}
+.profile-modal-outer-container{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:30px;
+}
+
+
+
+.profile-post-comment{
+    width: 100%;
+    height: fit-content;
+    
+
+    
+}
+
+.comment-section{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 5%;
+    height: fit-content;
+}
+
+.comment-box{
+    display: flex;
+    gap:2%;
+    height: fit-content;
+}
+
+.comment-img{
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    
+}
+
+.comment-img img{
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    object-fit: cover;
+    
+}
+
+
+
+.comment-details{
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    padding-inline: 2%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-block: 1%;
+    gap:1%;
+}
+
+
+.comment-name{
+    width: 100%;
+ 
+}
+
+.comment-text{
+    width: 100%;
+   
+    font-size: 20px;
+
+}
+
+.comment-time{
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+    
+                
+       
+}
+
+
 .background-grey{
     position: absolute;
     z-index: -1;
     background-color: rgb(236, 236, 236);
     width: 100%;
-    height: 250px;
+    height: 260px;
   
     
 }
@@ -30,14 +138,34 @@
 }
 
 .profile-upper-second{
-    width: 60%;
+    width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 10%;
+    gap: 5%;
     
 }
 
+.profile-upper-second-second{
+    width: 100%;
+    display: flex;
+    gap: 5%;
+    justify-content: flex-start;
+
+    
+}
+.follow-button{
+    width: 35%;
+    height: 40px;
+    background-color:rgb(170 170 170);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 15px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+
+
+}
 .profile-upper-first div{
     width: 300px;
     height: 300px;
@@ -46,6 +174,17 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+
+}
+
+.profile-upper-second-container{
+    width: 60%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10%;
+    flex-direction: column;
+    padding-block: 30px;
+    
 
 }
 
@@ -78,6 +217,8 @@
     top:25%;
     position: relative;
     top: 25%;
+    justify-content: center;
+    width: 35%;
     
 }
 
@@ -112,13 +253,13 @@
 .profile-data-container{
     width: 100%;
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 20% 20% 20% 20% 20%;
     /* grid-template-rows: 100px 100px 100px 100px ; */
     
 }
 
 .profile-data-post{
-    height: 400px;
+    height: 300px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -128,6 +269,17 @@
 
 
 @media (max-width: 830px) {
+    
+    .profile-modal-container{
+        width: 95%;
+        max-height: 80vh;
+      
+
+    }
+
+    .profile-modal-outer-container{
+        margin-top: 0;
+    }
     .profile-upper-first div{
         width: 250px;
         height: 250px;
@@ -140,6 +292,7 @@
        
     }
 
+    
         .profile-bottom-container {
             width: 90vw;
             margin: auto;
@@ -147,6 +300,8 @@
     
     
         }
+
+        
 
         .profile-data-container{
             grid-template-columns: 50% 50%;
@@ -156,6 +311,15 @@
             height: 300px;
            
         }
+
+        .profile-upper-second-second{
+            justify-content: center;
+            padding-block: 30px;
+        }
+       .profile-upper-middle {
+                    
+                    width: 100%;
+                }
 
 }
 
@@ -169,6 +333,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+              padding-top: 90px;
+            padding-bottom: 40px;
            
         }
 
@@ -178,9 +344,12 @@
         }
                 .profile-upper-middle {
                     top: 0px;
+                    width: 100%;
                 }
         
                 .profile-upper-second-numbers {
                     top: 0px;
                 }
+
+          
 }
