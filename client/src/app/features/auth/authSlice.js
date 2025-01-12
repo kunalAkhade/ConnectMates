@@ -2,9 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   user: null,
   token: localStorage.getItem("token"),
-  get isAuthenticated() {
-    return this.token ? true : false;
-  },
+  isAuthenticated:false,  
+  // get isAuthenticated() {
+  //   return this.token ? true : false;
+  // },
   status: "idle",
   error: null,
 };

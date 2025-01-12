@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginSuccess } from "../app/features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import axios  from "axios";
 
 function Login() {
   const dispatch = useDispatch();
@@ -11,11 +12,24 @@ function Login() {
   const { user } = useSelector((state) => state.auth);
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
-  const submit = (e) => {
+  const submit = async (e) => {
     if (username && password) {
-      localStorage.setItem("token", "token-demo");
-      dispatch(loginSuccess({ user: username, token: "token-demo" }));
-      navigate("/");
+      try{
+        const response = await axios.post('http://localhost:8080/api/v1/auth/login',{
+          username: username,
+          password:password
+        })
+        if(response?.status>=200 && response?.status<=299){
+          localStorage.setItem("token", response?.data);
+          dispatch(loginSuccess({ user: username, token: response?.data }));
+          navigate("/");
+        }
+      }catch(e){
+        
+      }
+     
+     
+      
     } else {
       if (!username) {
         document.querySelector("#username").style.border = "2px solid red";

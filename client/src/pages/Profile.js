@@ -14,6 +14,7 @@ import {
   fetchPostsSuccess,
   fetchPostsFailure,
 } from "../app/features/post/postSlice.js";
+import { useNavigate } from "react-router-dom";
 
 init({ data });
 function Home({ viewportWidth }) {
@@ -62,6 +63,7 @@ function Profile({ viewportWidth }) {
     (state) => state.post
   );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const fetch = async (page) => {
     dispatch(fetchPostsStart());
@@ -112,16 +114,67 @@ function Profile({ viewportWidth }) {
 
   const [show, setShow] = useState(false);
   const [showComment, setComment] = useState(false);
-  const handleShow = () => {
+  const [clickedImage, setClickImage] = useState("");
+  const handleShow = (image) => {
     window.scrollTo(0, 0);
     setShow(true);
     document.body.style.overflow = "hidden";
+    setClickImage(image);
   };
   const handleClose = () => {
     setShow(false);
     setComment(false);
     document.body.style.overflow = "auto";
+    setClickImage('');
   };
+
+  const [user, setUser] = useState(null)
+  const [post, setPost] = useState(null)
+
+  useEffect(()=>{
+
+    async function getUser(){
+     // const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZYXNoIiwiaWF0IjoxNzM2NjIxMDA4LCJleHAiOjE3MzY2MjQ2MDh9.L3uU0uwHCgpyGXKOT6p63tRZyOOUg3Mw5hdZWqjNNgE";
+      try{
+        const response = await axios.get("http://localhost:8080/api/v1/users/get/2",{
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        if(response?.data){
+            console.log(response.data)
+            setUser(response.data);
+        }
+        
+    } catch(e) {
+      console.log(e);
+    }
+      
+    }
+
+    async function getPosts() {
+      console.log(localStorage.getItem('token'))
+     // const token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZYXNoIiwiaWF0IjoxNzM2NjIxMDA4LCJleHAiOjE3MzY2MjQ2MDh9.L3uU0uwHCgpyGXKOT6p63tRZyOOUg3Mw5hdZWqjNNgE";
+      try {
+        const response = await axios.get("http://localhost:8080/api/v1/post/get/2/all",{
+          headers:{
+            Authorization:`Bearer ${localStorage.getItem('token')}`
+          }
+        })
+        if(response.status===401){
+          navigate('/login')
+        }
+        setPost(response.data)
+        
+      } catch (error) {
+        console.log(error)
+      }
+    }
+ 
+    getUser();
+    getPosts();
+
+  },[]);
 
   return (
     <>
@@ -129,9 +182,9 @@ function Profile({ viewportWidth }) {
       <div className="profile-main">
         <div className="profile-upper">
           <div className="profile-upper-first">
-            <div></div>
+            <div style={{backgroundImage:`url(data:image/jpeg;base64,${user?.profilePicture})`}} ></div>
           </div>
-          <div className="profile-upper-second-container">
+          {/* <div className="profile-upper-second-container">
             <div className="profile-upper-second">
               <div className="profile-upper-middle">
                 <h2>Alisha Kapoor</h2>
@@ -149,7 +202,25 @@ function Profile({ viewportWidth }) {
                   <div className="profile-num-container">
                     <div className="numbers">400</div>
                     <div>Following</div>
-                  </div>
+                  </div> */}
+
+          <div className="profile-upper-second">
+            <div className="profile-upper-middle">
+              <h2>{user?.username}</h2>
+            </div>
+            <div className="profile-upper-second-numbers">
+              <div className="profile-num">
+                <div className="profile-num-container">
+                  <div className="numbers">{user?.post}</div>
+                  <div style={{ textAlign: "center" }}>Posts</div>
+                </div>
+                <div className="profile-num-container">
+                  <div className="numbers">{user?.followers}</div>
+                  <div>Followers</div>
+                </div>
+                <div className="profile-num-container">
+                  <div className="numbers">{user?.following}</div>
+                  <div>Following</div>
                 </div>
               </div>
             </div>
@@ -185,6 +256,7 @@ function Profile({ viewportWidth }) {
           </div>
           <div className="profile-data">
             <div className="profile-data-container">
+              {/* <div className="profile-data-post" onClick={handleShow}></div>
               <div className="profile-data-post" onClick={handleShow}></div>
               <div className="profile-data-post" onClick={handleShow}></div>
               <div className="profile-data-post" onClick={handleShow}></div>
@@ -201,8 +273,19 @@ function Profile({ viewportWidth }) {
               <div className="profile-data-post" onClick={handleShow}></div>
               <div className="profile-data-post" onClick={handleShow}></div>
               <div className="profile-data-post" onClick={handleShow}></div>
-              <div className="profile-data-post" onClick={handleShow}></div>
-              <div className="profile-data-post" onClick={handleShow}></div>
+              <div className="profile-data-post" onClick={handleShow}></div> */}
+
+              {post?.map((item)=>{
+                return <div className="profile-data-post" style={{backgroundImage: `url(data:image/jpeg;base64,${item.media})`}} onClick={() => handleShow(item.media)}></div>
+              })  
+              }
+
+              <div className="profile-data-post"></div>
+              <div className="profile-data-post"></div>
+              <div className="profile-data-post"></div>
+              <div className="profile-data-post"></div>
+              <div className="profile-data-post"></div>
+              <div className="profile-data-post"></div>
             </div>
           </div>
         </div>
@@ -217,7 +300,7 @@ function Profile({ viewportWidth }) {
                 <div className="home-container-post">
                   <div className="home-container-create-text">
                     <div className="post-profile">
-                      <img src={demo} alt="" />
+                      <img src={`data:image/jpeg;base64,${user?.profilePicture}`} alt="" />
                     </div>
                     <div className="post-text">
                       <div>
@@ -245,7 +328,7 @@ function Profile({ viewportWidth }) {
                   />
 
                   <div className="post-media">
-                    <img src={demo} alt="" />
+                    <img src={`data:image/jpeg;base64,${clickedImage}`} alt="" />
                   </div>
                   <div className="post-bottom">
                     <img onClick={() => alert("Liked")} src={heart} alt="" />

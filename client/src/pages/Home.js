@@ -14,7 +14,7 @@ import Carousel from "react-elastic-carousel";
 import { useState } from "react";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   loginSuccess,
   logout,
@@ -24,10 +24,14 @@ import axios from "axios";
 
 init({ data });
 function Home({ viewportWidth }) {
+
+  const  {isAuthenticated, token} = useSelector((state)=> state.auth);
+
+
   useEffect(() => {
     const handleFetch = async () => {
       const response = await axios.get("");
-      if (response.data.message) {
+      if (response.data.message) {  
       }
     };
     handleFetch();
@@ -90,6 +94,8 @@ function Home({ viewportWidth }) {
   const handleShow = () => setShow(true);
   return (
     <>
+
+    {
       <div className="home-main">
         <div className="home-container">
           <div className="home-container-right">
@@ -207,6 +213,7 @@ function Home({ viewportWidth }) {
           </div>
         </div>
       </div>
+    } 
       {show ? (
         <>
           <div className="my-modal-container"></div>
